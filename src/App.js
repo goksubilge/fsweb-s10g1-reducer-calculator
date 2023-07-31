@@ -1,9 +1,14 @@
-import React from 'react';
+import React from "react";
+import { useReducer } from "react";
 
-import TotalDisplay from './components/TotalDisplay';
-import CalcButton from './components/CalcButton';
+import TotalDisplay from "./components/TotalDisplay";
+import CalcButton from "./components/CalcButton";
+// import { useReducer } from "react";
+import reducer, { initialState } from "./reducers";
+// import { MEMORY_ADD}
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -13,15 +18,21 @@ function App() {
       <div className="container row mt-5">
         <div className="col-md-12 d-flex justify-content-center">
           <form name="Cal">
-
-            <TotalDisplay value={0} />
+            <TotalDisplay value={state.total} />
             <div className="row details">
-              <span id="operation"><b>Operation:</b> X</span>
-              <span id="memory"><b>Memory:</b> 0</span>
+              <span id="operation">
+                <b>Operation:</b> {state.operation}
+              </span>
+              <span id="memory">
+                <b>Memory:</b> {state.memory}
+              </span>
             </div>
 
             <div className="row">
-              <CalcButton value={"M+"} />
+              <CalcButton
+                // onClick={() => dispatch({ type: MEMORY_ADD })}
+                value={"M+"}
+              />
               <CalcButton value={"MR"} />
               <CalcButton value={"MC"} />
             </div>
@@ -53,7 +64,6 @@ function App() {
             <div className="row ce_button">
               <CalcButton value={"CE"} />
             </div>
-
           </form>
         </div>
       </div>
