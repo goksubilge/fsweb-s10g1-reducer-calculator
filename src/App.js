@@ -3,10 +3,15 @@ import { useReducer } from "react";
 
 import TotalDisplay from "./components/TotalDisplay";
 import CalcButton from "./components/CalcButton";
-// import { useReducer } from "react";
 import reducer, { initialState } from "./reducers";
-import { applyNumber, CHANGE_OPERATION } from "./actions";
-// import { MEMORY_ADD}
+import {
+  applyNumber,
+  CHANGE_OPERATION,
+  CLEAR_DISPLAY,
+  MEMORY_ADD,
+  MEMORY_RECALL,
+  MEMORY_CLEAR,
+} from "./actions";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -31,11 +36,17 @@ function App() {
 
             <div className="row">
               <CalcButton
-                // onClick={() => dispatch({ type: MEMORY_ADD })}
+                onClick={() => dispatch({ type: MEMORY_ADD })}
                 value={"M+"}
               />
-              <CalcButton value={"MR"} />
-              <CalcButton value={"MC"} />
+              <CalcButton
+                onClick={() => dispatch({ type: MEMORY_RECALL })}
+                value={"MR"}
+              />
+              <CalcButton
+                onClick={() => dispatch({ type: MEMORY_CLEAR })}
+                value={"MC"}
+              />
             </div>
 
             <div className="row">
@@ -105,7 +116,10 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"} />
+              <CalcButton
+                onClick={() => dispatch({ type: CLEAR_DISPLAY })}
+                value={"CE"}
+              />
             </div>
           </form>
         </div>
