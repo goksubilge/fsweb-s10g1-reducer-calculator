@@ -2,18 +2,18 @@ import { ADD_ONE, APPLY_NUMBER, CHANGE_OPERATION } from "./../actions";
 
 export const initialState = {
   total: 100,
-  operation: "*",
+  operation: "+",
   memory: 100,
 };
 
 const calculateResult = (num1, num2, operation) => {
   switch (operation) {
     case "+":
-      return num1 + num2;
+      return Number(num1) + Number(num2);
     case "*":
-      return num1 * num2;
+      return Number(num1) * Number(num2);
     case "-":
-      return num1 - num2;
+      return Number(num1) - Number(num2);
     default:
       return;
   }
